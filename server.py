@@ -13,4 +13,10 @@ class Employees(Resource):
         conn = db_connect.connect()
         query = conn.execute("select * from employees")
         return {'employees': [i[0] for i in query.cursor.fetchall()]}
-        
+
+class Tracks(Resource):
+    def get(self):
+        conn = db_connect.connect()
+        query = conn.execute("select trackid, name, composer, unitprice from tracks;")
+        result = {'data': [dict(zip(tuple (query.keys()) ,i)) for i in query.cursor]}
+        return jsonify(result)
