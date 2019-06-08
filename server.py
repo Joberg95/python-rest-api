@@ -12,4 +12,5 @@ class Employees(Resource):
     def get(self):
         conn = db_connect.connect()
         query = conn.execute("select * from employees")
+        return {'employees': [i[0] for i in query.cursor.fetchall()]}
         
