@@ -20,3 +20,9 @@ class Tracks(Resource):
         query = conn.execute("select trackid, name, composer, unitprice from tracks;")
         result = {'data': [dict(zip(tuple (query.keys()) ,i)) for i in query.cursor]}
         return jsonify(result)
+
+class Employees_name(Resource):
+    def get(self, employee_id):
+        conn = db_connect.connect()
+        query = conn.execute("select * from employees where EmployeeId =%d " %int(employee_id))
+        
