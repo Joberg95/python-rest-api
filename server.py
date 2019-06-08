@@ -7,3 +7,9 @@ from flask.ext.jsonpify import jsonify
 db_connect = create_engine('sqlite://chinook.db')
 app = Flask(__name__)
 api = Api(app)
+
+class Employees(Resource):
+    def get(self):
+        conn = db_connect.connect()
+        query = conn.execute("select * from employees")
+        
